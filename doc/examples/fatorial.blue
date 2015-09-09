@@ -2,8 +2,8 @@ def main :
    input var
    i = 1
    total = 0
-   while (l1 <= var ) :
-      total = i1 * total
+   while (i <= var ) :
+      total = i * total
       i = i + 1
    end while
 end
