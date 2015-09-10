@@ -10,11 +10,11 @@ using namespace std;
 class analyser{
 
 	public:
-		
+
 		void set_symbols(string st){
 			string sub;
 			istringstream iss(st);
-			
+
 			do{
 				iss >> sub;
 				this->symbols.push_back(sub);
@@ -25,7 +25,7 @@ class analyser{
 			string state, sub;
 			istringstream iss(st);
 			unsigned cont = 0;
-			
+
 			iss >> state;
 
 			do{
@@ -63,20 +63,30 @@ class analyser{
 
 		}
 
+		void print_out(const char * fName)	{
+			ofstream arqSaida;
+			arqSaida.open(fName, ofstream::out);
+			for ( unsigned i = 0; i < out.size(); i++ )
+				arqSaida << this->out[i] << endl;
+
+			arqSaida.close();
+		}
+
 		void show_out(){
 			for ( unsigned i = 0; i < out.size(); i++ )
 				cout << this->out[i] << endl;
 		}
 
 		bool is_separator(char symbol){
-			if( symbol == '+' || symbol == '-' || symbol == ' ' || symbol == ')' || symbol == '(' || symbol == '*' || symbol == '/' || symbol == ':' || symbol == '=' || symbol == '<' || symbol == '>')
+			string strOperators = "+- )(/*:=<>";
+			if(strOperators.find(symbol) != string::npos)
 				return true;
 			return false;
 		}
 
 	private:
 		map < string, map < string, string> > table ;
-		vector<string> symbols; 
+		vector<string> symbols;
 		vector<string> out;
 
 };
@@ -85,6 +95,7 @@ class analyser{
 int main ( int argc, char ** argv ) {
 	analyser ant;
 	string line;
+	string arqSaida (argv[2]);
 	ifstream source_mat (argv[1]);
 	ifstream code (argv[2]);
 
@@ -98,15 +109,18 @@ int main ( int argc, char ** argv ) {
 	}else{
 		cout << "No table file" << endl;
 		return 1;
-	}	
+	}
 
 	if(code.is_open()){
 		while(getline(code, line)){
-			ant.set_out(line);				
+			ant.set_out(line);
 		}
 	}
 
 	ant.show_out();
+
+	arqSaida += ".lextbl";
+	ant.print_out(arqSaida.c_str());
 
 	return 0;
 }
