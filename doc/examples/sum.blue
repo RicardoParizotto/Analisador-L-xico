@@ -5,7 +5,7 @@ def sum:
 
     loop:
         sum= sum + j
-        j = j+1
+        j = j+ 1
         if j < k:
              goto loop
         end if
