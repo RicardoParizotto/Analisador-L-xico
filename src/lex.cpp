@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 class analyser{
 
 	public:
@@ -95,9 +96,9 @@ class analyser{
 int main ( int argc, char ** argv ) {
 	analyser ant;
 	string line;
-	string arqSaida (argv[2]);
-	ifstream source_mat (argv[1]);
-	ifstream code (argv[2]);
+	string arqSaida (argv[1]);
+	ifstream source_mat ("../doc/table.csv");
+	ifstream code (argv[1]);
 
 	if(source_mat.is_open()){
 		getline(source_mat, line);
