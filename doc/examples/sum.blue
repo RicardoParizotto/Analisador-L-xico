@@ -1,0 +1,12 @@
+def sum:
+    input k
+    sum= 0
+    j = 0
+
+    loop:
+        sum= sum + j
+        j = j+1
+        if j < k:
+             goto loop
+        end if
+end
